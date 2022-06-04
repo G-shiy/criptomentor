@@ -1,0 +1,13 @@
+Django==3.2.12
+Markdown==3.3.6
+djangorestframework==3.13.1
+Pillow==9.0.1
+drf-spectacular==0.22.0
+psycopg2==2.9.3
+djangorestframework-simplejwt==5.1.0
+python-dotenv==0.20.0
+psycopg2-binary==2.9.3
+validate-docbr==1.10.0
+django-heroku==0.3.1
+gunicorn==20.1.0
+django-admin-honeypot==1.1.0
