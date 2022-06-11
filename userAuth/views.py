@@ -5,9 +5,10 @@ from userAuth.pagination import FilterResults
 from userAuth.serializer import TextSerializer, UsuarioSerializer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
-class LoginAPIView(generics.GenericAPIView):
+class LoginAPIView(generics.ListAPIView):
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
+    queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     def get_object(self):
         pk = self.kwargs.get('pk')
