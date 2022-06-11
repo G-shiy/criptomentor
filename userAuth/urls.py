@@ -8,5 +8,5 @@ urlpatterns = [
     path('deleteUser/<int:pk>', DestroyUser.as_view()),
     path('listUserId/<int:pk>', listUserId.as_view()),
     path('userRetrieveUpdate/<int:pk>', UserRetrieveUpdate.as_view()),
-    path('GetAuthenticatedUser', LoginAPIView.as_view()),
+    path('GetAuthenticatedUser/<int:pk>', LoginAPIView.as_view()),
 ]
