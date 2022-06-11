@@ -6,7 +6,7 @@ from userAuth.serializer import TextSerializer, UsuarioSerializer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 class GetAuthenticatedUser(generics.ListAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
