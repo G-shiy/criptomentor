@@ -8,7 +8,6 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 class LoginAPIView(generics.GenericAPIView):
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
-    queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     def get_object(self):
         pk = self.kwargs.get('pk')
