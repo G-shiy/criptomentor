@@ -5,7 +5,7 @@ from userAuth.pagination import FilterResults
 from userAuth.serializer import TextSerializer, UsuarioSerializer
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
-class LoginAPIView(generics.ListAPIView):
+class LoginAPIView(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Usuario.objects.all()
@@ -16,7 +16,7 @@ class LoginAPIView(generics.ListAPIView):
         if pk == "current":
             return self.request.user
 
-        return super(LoginAPIView, self).get_object()
+        return super().get_object()
 
 
 class CreateUser(generics.CreateAPIView):
