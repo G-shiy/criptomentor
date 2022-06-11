@@ -1,4 +1,4 @@
-from userAuth.views import TextviewSet, GetAuthenticatedUser
+from userAuth.views import TextviewSet
 from django.contrib import admin
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from django.urls import path, include
@@ -13,7 +13,6 @@ base = "api/v1/"
 router = routers.DefaultRouter()
 
 router.register('texts', TextviewSet, basename='texts')
-router.register('userAuthenticated', GetAuthenticatedUser, basename='userAuthenticated')
 
 
 urlpatterns = [
