@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import questions, choice
+from models import Questions, choice
 from datetime import date
 
 class TestSerializer(serializers.ModelSerializer):
@@ -37,11 +37,11 @@ class TestSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = questions
+        model = Questions
         fields = '__all__'
         
     def save(self):
-        prova = questions(
+        prova = Questions(
             class_test = self.validated_data['class_test'],
             title = self.validated_data['title'],
             created_at = self.validated_data['class_test'],
