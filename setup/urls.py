@@ -13,7 +13,7 @@ base = "api/v1/"
 router = routers.DefaultRouter()
 
 router.register('texts', TextviewSet, basename='texts')
-router.register('userAuthenticated', GetAuthenticatedUser, basename='texts')
+router.register('userAuthenticated', GetAuthenticatedUser, basename='userAuthenticated')
 
 
 urlpatterns = [
