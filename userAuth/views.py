@@ -1,36 +1,19 @@
+from requests import request
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import viewsets, generics
-from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import viewsets, generics, mixins
+from rest_framework.exceptions import ValidationError
+from rest_framework_simplejwt.backends import TokenBackend
 from userAuth.models import Text, Usuario
-from django.contrib import auth
-import jwt
 from userAuth.pagination import FilterResults
 from userAuth.serializer import TextSerializer, UsuarioSerializer, LoginSerializer
-from django.conf import settings
 
-class GetAuthenticatedUser(generics.GenericAPIView):
-    serializer_class = LoginSerializer
-    def post(self, request):
-        data = request.data
-        username = data.get('username', '')
-        password = data.get('password', '')
-        user = auth.authenticate(username=username, password=password)
+class GetAuthenticatedUser(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
 
-        if user:
-            auth_token = jwt.encode(
-                {'username': user.username}, settings.JWT_SECRET_KEY, algorithm="HS256")
-
-            serializer = UsuarioSerializer(user)
-
-            data = {'user': serializer.data, 'token': auth_token}
-
-            return Response(data, status=status.HTTP_200_OK)
-
-            # SEND RES
-        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
-
+    def get_object(self):
+        return self.request.user
+        
 class CreateUser(generics.CreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
