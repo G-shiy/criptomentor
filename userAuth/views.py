@@ -1,4 +1,3 @@
-from requests import request
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, generics, mixins
 from rest_framework.exceptions import ValidationError
@@ -13,7 +12,7 @@ class GetAuthenticatedUser(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     def get_object(self):
         return self.request.user
-        
+
 class CreateUser(generics.CreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
