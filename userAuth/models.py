@@ -26,7 +26,7 @@ class Usuario(AbstractUser):
     data_nascimento: int = models.DateField()
     cpf: str = models.CharField(max_length=15, unique=True)
     pfp = models.ImageField(blank=True, null=True)
-    created_at: float = models.DateField(default=datetime.now)
+    created_at: float = models.DateField(auto_created=datetime.now)
     premium: bool = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'premium', 'tel', 'is_staff', 'is_superuser']

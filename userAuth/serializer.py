@@ -30,7 +30,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Usuario
-        fields = ['email','username', 'password','password_confirm', 'tel','data_nascimento', 'cpf', 'pfp', 'created_at','premium', 'is_staff', 'is_superuser']
+        fields = ['id','email','username', 'password','password_confirm', 'tel','data_nascimento', 'cpf', 'pfp', 'created_at','premium', 'is_staff', 'is_superuser']
         extra_kwargs = {
             'password': {
                 'write_only': True,
@@ -44,9 +44,6 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'username': {
                 'error_messages': {"blank": "o campo usuario não pode ficar vazio"}
                 },
-            'created_at': {
-                'default': datetime.now
-            }
         
         }
  
@@ -88,6 +85,17 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
         return conta
         
+
+class LoginSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        max_length=65, min_length=8, write_only=True)
+    username = serializers.CharField(max_length=255, min_length=2)
+
+    class Meta:
+        model = Usuario
+        fields = ['username', 'password']
+
+
 """
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:

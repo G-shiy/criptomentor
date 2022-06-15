@@ -1,22 +1,34 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, generics
+from rest_framework.response import Response
+from rest_framework import status
 from userAuth.models import Text, Usuario
+from django.contrib import auth
+import jwt
 from userAuth.pagination import FilterResults
-from userAuth.serializer import TextSerializer, UsuarioSerializer
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from userAuth.serializer import TextSerializer, UsuarioSerializer, LoginSerializer
+from django.conf import settings
 
-class LoginAPIView(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
-    queryset = Usuario.objects.all()
-    serializer_class = UsuarioSerializer
-    def get_object(self):
-        pk = self.kwargs.get('pk')
+class GetAuthenticatedUser(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+    def post(self, request):
+        data = request.data
+        username = data.get('username', '')
+        password = data.get('password', '')
+        user = auth.authenticate(username=username, password=password)
 
-        if pk == "current":
-            return self.request.user
+        if user:
+            auth_token = jwt.encode(
+                {'username': user.username}, settings.JWT_SECRET_KEY, algorithm="HS256")
 
-        return super().get_object()
+            serializer = UsuarioSerializer(user)
+
+            data = {'user': serializer.data, 'token': auth_token}
+
+            return Response(data, status=status.HTTP_200_OK)
+
+            # SEND RES
+        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class CreateUser(generics.CreateAPIView):
@@ -25,7 +37,6 @@ class CreateUser(generics.CreateAPIView):
 
 
 class ListUser(generics.ListAPIView):
-    #permission_classes = [IsAuthenticated]
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
 
