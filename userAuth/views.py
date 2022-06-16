@@ -9,6 +9,7 @@ from userAuth.serializer import TextSerializer, UsuarioSerializer, LoginSerializ
 class GetAuthenticatedUser(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         return self.request.user
