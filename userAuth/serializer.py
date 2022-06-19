@@ -4,13 +4,13 @@ from userAuth import validators
 from datetime import datetime
 
 class UsuarioSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(
+    senha = serializers.CharField(
         style={'input_type': 'password'},
         write_only=True,
         label="Senha",
         error_messages= {"blank": "o campo senha não pode ficar vazio"}
     )
-    password_confirm = serializers.CharField(
+    confirmar_senha = serializers.CharField(
         style={'input_type': 'password'},
         write_only=True,
         label="Confirme a senha",
@@ -30,9 +30,9 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Usuario
-        fields = ['id','email','username', 'password','password_confirm', 'tel','data_nascimento', 'cpf', 'pfp', 'created_at','premium', 'is_staff', 'is_superuser']
+        fields = ['id','email','username', 'senha','confirmar_senha', 'tel','data_nascimento', 'cpf', 'pfp', 'created_at','premium', 'is_staff', 'is_superuser']
         extra_kwargs = {
-            'password': {
+            'senha': {
                 'write_only': True,
                 },
             'email': {
@@ -44,7 +44,14 @@ class UsuarioSerializer(serializers.ModelSerializer):
             'username': {
                 'error_messages': {"blank": "o campo usuario não pode ficar vazio"}
                 },
-        
+            'data_nascimento': {
+                'error_messages': {"blank": "o campo data de nascimento não pode ficar vazio"},
+                'error_messages': {"invalid": "o campo data de nascimento não está no formato correto. O formato correto é: DD/MM/YYYY"},
+                },
+            'created_at': {
+                'error_messages': {"blank": "o campo de data de criação não pode ficar vazio"},
+                'error_messages': {"invalid": "o campo de data de criação não está no formato correto. O formato correto é: DD/MM/YYYY"},
+                },
         }
  
     def validate(self, data: dict):
@@ -67,8 +74,8 @@ class UsuarioSerializer(serializers.ModelSerializer):
             created_at=self.validated_data['created_at'],
             )
 
-        password = self.validated_data['password']
-        password_confirm = self.validated_data['password_confirm']
+        password = self.validated_data['senha']
+        password_confirm = self.validated_data['confirmar_senha']
 
         if password != password_confirm:
             raise serializers.ValidationError(

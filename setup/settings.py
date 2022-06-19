@@ -38,7 +38,9 @@ CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = ['*']
 
 REST_FRAMEWORK = {
-    
+    "DEFAULT_AUTHENTICATION_CLASSES":(
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
     'DATE_FORMAT': "%d/%m/%Y",
     'DATETIME_FORMAT':'%d/%m/Y',
     'DATE_INPUT_FORMATS': ["%d/%m/%Y"],

@@ -1,7 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import viewsets, generics, mixins
 from rest_framework.exceptions import ValidationError
-from rest_framework_simplejwt.backends import TokenBackend
 from userAuth.models import Text, Usuario
 from userAuth.pagination import FilterResults
 from userAuth.serializer import TextSerializer, UsuarioSerializer, LoginSerializer
