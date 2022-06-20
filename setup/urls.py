@@ -1,4 +1,4 @@
-from userAuth.views import TextviewSet, GetAuthenticatedUser
+from userAuth.views import TextviewSet, GetAuthenticatedUser, AnaliseviewSet, NoticiaviewSet
 from django.contrib import admin
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from django.urls import path, include
@@ -12,6 +12,8 @@ from rest_framework_simplejwt.views import (
 base = "api/v1/"
 router = routers.DefaultRouter()
 
+router.register('Noticia', NoticiaviewSet, basename='noticia')
+router.register('analise', AnaliseviewSet, basename='analise')
 router.register('texts', TextviewSet, basename='texts')
 router.register('GetAuthenticatedUser', GetAuthenticatedUser, basename='GetAuthenticatedUser')
 
