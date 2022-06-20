@@ -2,9 +2,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import viewsets, generics, mixins
 from rest_framework.exceptions import ValidationError
-from userAuth.models import Text, Usuario
+from userAuth.models import Noticia, Text, Usuario
 from userAuth.pagination import FilterResults
-from userAuth.serializer import TextSerializer, UsuarioSerializer, LoginSerializer
+from userAuth.serializer import NoticiaSerializer, AnaliseSerializer, TextSerializer, UsuarioSerializer, LoginSerializer
 
 class GetAuthenticatedUser(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Usuario.objects.all()
@@ -55,12 +55,10 @@ class TextviewSet(viewsets.ModelViewSet):
     pagination_class = FilterResults
 
 
-"""class CursoviewSet(viewsets.ModelViewSet):
-  EXIBINDO TODOS OS CURSOS
-  queryset = Curso.objects.all()
-  serializer_class = CursoSerializer
+class NoticiaviewSet(viewsets.ModelViewSet):
+  queryset = Noticia.objects.all()
+  serializer_class = NoticiaSerializer
 
 class AnaliseviewSet(viewsets.ModelViewSet):
-  EXIBINDO TODOS AS ANALISES
   queryset = Analise.objects.all()
-  serializer_class = AnaliseSerializer"""
+  serializer_class = AnaliseSerializer

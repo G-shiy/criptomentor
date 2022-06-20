@@ -9,11 +9,6 @@ time = [
     ('04', '20'),
 ]
 
-tipo = [
-    ('text', 'text'),
-    ('analise', 'analise'),
-    ('curso', 'curso'),
-]
 
 
 class Usuario(AbstractUser):
@@ -38,20 +33,18 @@ class Usuario(AbstractUser):
 class Text(models.Model):
     text = models.TextField(blank=False, null=False, editable=True)
     time = models.CharField(blank=True, null=False, editable=True, choices=time, max_length=3)
-    types = models.CharField(choices=tipo, max_length=8, blank=True)
     title = models.CharField(blank=False, null=False, editable=True, max_length=25)
     imagem = models.ImageField(blank=True, null=False)
     thumbnail = models.ImageField(blank=False, null=False)
     created_at = models.DateField(default=datetime.now)
     video = models.URLField(blank=False, null=False)
-    theme = models.CharField(blank=False, null=False, max_length=35)
+    theme = models.CharField(blank=False, null=False, max_length=60)
 
     def __str__(self) -> str:
         return self.text
 
 
-'''
-class Curso(models.Model):
+class Noticia(models.Model):
   text = models.TextField(blank=False,null=False, editable=True)
   title = models.CharField(blank=False, null=False, editable=True, max_length=25)
   time = models.CharField(blank=True, null=False, editable=True, choices=time, max_length=3)
@@ -59,19 +52,21 @@ class Curso(models.Model):
   thumbnail = models.ImageField(blank=True, null=False)
   created_at = models.DateField(default=datetime.now)
   video = models.URLField(blank=False, null=False)
-  theme = models.CharField(blank=False, null=False, max_length=10) # voltar aqui depois
+  theme = models.CharField(blank=False, null=False, max_length=60) 
+  
   def __str__(self) -> str:
       return self.text
 
 class Analise(models.Model):
   text = models.TextField(blank=False,null=False, editable=True)
-  title = models.CharField(blank=False, null=False, editable=True, max_length=25)
+  title = models.CharField(blank=False, null=False, editable=True, max_length=60)
   imagem = models.ImageField()
   thumbnail = models.ImageField(blank=False, null=False)
   created_at = models.DateField(default=datetime.now)
   video = models.URLField(blank=False, null=False)
-  theme = models.CharField(blank=False, null=False, max_length=10) # voltar aqui depois
+  theme = models.CharField(blank=False, null=False, max_length=10) 
+
   def __str__(self) -> str:
       return self.text
       
-'''
+

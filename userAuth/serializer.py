@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from userAuth.models import Text, Usuario
+from userAuth.models import Text, Usuario, Noticia, Analise
 from userAuth import validators
 from datetime import datetime
 
@@ -103,16 +103,16 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ['username', 'password']
 
 
-"""
-class CursoSerializer(serializers.ModelSerializer):
+
+class NoticiaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Curso
+        model = Noticia
         fields = '__all__'
 
 class AnaliseSerializer(serializers.ModelSerializer):
     class Meta:    
         model = Analise
-        fields = '__all__'"""
+        fields = '__all__'
 
 class TextSerializer(serializers.ModelSerializer):
     class Meta:
