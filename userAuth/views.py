@@ -2,7 +2,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import viewsets, generics, mixins
 from rest_framework.exceptions import ValidationError
-from userAuth.models import Noticia, Text, Usuario
+from userAuth.models import Noticia, Text, Usuario, Analise
 from userAuth.pagination import FilterResults
 from userAuth.serializer import NoticiaSerializer, AnaliseSerializer, TextSerializer, UsuarioSerializer, LoginSerializer
 
