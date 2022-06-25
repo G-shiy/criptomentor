@@ -9,6 +9,13 @@ time = [
     ('04', '20'),
 ]
 
+rating = [
+    ('01', '1 estrela'),
+    ('02', '2 estrelas'),
+    ('03', '3 estrelas'),
+    ('04', '4 estrelas'),
+    ('05', '5 estrelas'),
+]
 
 
 class Usuario(AbstractUser):
@@ -64,7 +71,8 @@ class Analise(models.Model):
   thumbnail = models.ImageField(blank=False, null=False)
   created_at = models.DateField(default=datetime.now)
   video = models.URLField(blank=False, null=False)
-  theme = models.CharField(blank=False, null=False, max_length=10) 
+  theme = models.CharField(blank=False, null=False, max_length=10)
+  rating = models.CharField(blank=False, null=False, choices=rating, max_length=8)
 
   def __str__(self) -> str:
       return self.text

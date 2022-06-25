@@ -58,7 +58,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
         if not validators.username_valido(data['username']):
             raise serializers.ValidationError({"Usuário contém caractéres além de A-Z:" "Usuário contém caractéres além de A-Z"})
         if not validators.cpf_valido(data['cpf']):
-            raise serializers.ValidationError({"Cpf inválido:" "Cpf inválido"})
+            raise serializers.ValidationError({"Cpf inválido": "Cpf inválido"})
         if not validators.tel_valido(data['tel']):
             raise serializers.ValidationError({"Telefone inválido": "Telefone inválido"})
         return data
